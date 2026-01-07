@@ -14,7 +14,7 @@
   border-radius: 0;
   cursor: pointer;
 
-  @include mixins.lg {
+  @include mixins.media(lg) {
     display: none;
   }
 

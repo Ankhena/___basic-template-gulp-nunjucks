@@ -29,7 +29,7 @@
   border-radius: 14px;
   background: var(--color-bg, #ffffff);
 
-  @include mixins.lg {
+  @include mixins.media(lg) {
     padding: 50px 60px;
   }
 }
@@ -58,7 +58,7 @@
   background: none;
   border: none;
 
-  @include mixins.lg {
+  @include mixins.media(lg) {
     top: 30px;
     right: 30px;
     font-size: 14px;

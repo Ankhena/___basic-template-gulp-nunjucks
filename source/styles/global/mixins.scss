@@ -3,6 +3,12 @@
 @use "sass:string";
 // для работы со строками
 
+@use "sass:map";
+// для работы с map массивов (для @media)
+
+@use "sass:meta";
+// для работы meta.type-of вместо type-of (для @media)
+
 @use "variables";
 
 
@@ -31,111 +37,117 @@ $layout-width: 1900; //указываем ширину макета, от кот
 // и в итоге запретит увеличиваться больше, чем было px при макетной ширине
 // не нужно будет писать лишние media
 // тут используется в основном для padding крупных секций
+
 @function min-px-vw($size) {
   // но нужно экранировать min, т.к. зарезервированная функция scss
   @return #{"min("}$size+px, (math.div($size, $layout-width)*100)+vw#{")"};
 }
 
 
+
+// ///////////////////////////////////////// //
 //media
 
-@mixin esm {
-  @media (min-width: variables.$esm) {
-    @content;
+/// Универсальный миксин, поддерживает 'min', 'max' и 'range'
+// ///////////////////
+// media
+// @include mixins.media(esm) -> mobile-first
+// @include mixins.media(esm, max) -> @media (max-width: 1023.98px)
+// @include mixins.media(sm, elg, range) -> @media (min-width: sm) and (max-width: elg - 0.02px)
+
+@mixin media($key, $mode-or-max-key: min, $range-flag: null) {
+  $value: null;
+  $max-value: null;
+  $mode: min;
+
+  // Определяем режим использования
+  @if $range-flag == range {
+    // Режим интервала: $key = min, $mode-or-max-key = max
+    $mode: range;
+    $max-value: get-media-value($mode-or-max-key);
+  } @else {
+    // Обычный режим: $key = ключ, $mode-or-max-key = min/max
+    $mode: $mode-or-max-key;
+  }
+
+  // Получаем основное значение
+  $value: get-media-value($key);
+
+  // Если value остался null — выводим предупреждение и НЕ вставляем @content
+  @if $value == null {
+    @warn "media: unsupported key `#{$key}`; expected key from variables.$sizes, number or px string.";
+  }
+  @else if $mode == range and $max-value == null {
+    @warn "media: unsupported max key `#{$mode-or-max-key}` for range mode";
+  }
+  @else {
+    // Проверяем корректность режима
+    @if not ($mode == min or $mode == max or $mode == range) {
+      @warn "media: unknown mode `#{$mode}`, expected 'min', 'max' or 'range'. Falling back to 'min'.";
+      $mode: min;
+    }
+
+    // Преобразуем все значения к числу для consistent поведения
+    $numeric-value: if(meta.type-of($value) == 'number', $value, meta.inspect($value));
+
+    @if $mode == max {
+      // Для max-width всегда вычитаем 0.02px чтобы избежать пересечений
+      $limit: if(meta.type-of($numeric-value) == 'number', $numeric-value - 0.02, $numeric-value);
+      @media (width <= #{$limit}) {
+        @content;
+      }
+    } @else if $mode == range {
+      // Для интервала: min-width и max-width с вычитанием 0.02px
+      $numeric-max-value: if(meta.type-of($max-value) == 'number', $max-value, meta.inspect($max-value));
+      $max-limit: if(meta.type-of($numeric-max-value) == 'number', $numeric-max-value - 0.02, $numeric-max-value);
+
+      @media (width >= #{$numeric-value}) and (width < #{$max-limit}) {
+        @content;
+      }
+    } @else {
+      // min-width (по умолчанию)
+      @media (width >= #{$numeric-value}) {
+        @content;
+      }
+    }
   }
 }
 
-@mixin sm {
-  @media (min-width: variables.$sm) {
-    @content;
+// Вспомогательная функция для получения значения медиа-запроса
+@function get-media-value($key) {
+  // 1) ключ из variables.$sizes
+  @if meta.type-of($key) == 'string' and map.has-key(variables.$sizes, $key) {
+    @return map.get(variables.$sizes, $key);
   }
-}
-
-@mixin md {
-  @media (min-width: variables.$md) {
-    @content;
+    // 2) строка с 'px'
+  @else if meta.type-of($key) == 'string' and string.index($key, 'px') {
+    @return $key;
   }
-}
-
-@mixin lg {
-  @media (min-width: variables.$lg) {
-    @content;
+    // 3) число (например 992px как number)
+  @else if meta.type-of($key) == 'number' {
+    @return $key;
   }
-}
-
-//@media (min-width: 1390px) {
-//@mixin _lg {
-//  @media (min-width: 1300px) {
-//    @content;
-//  }
-//}
-
-@mixin elg {
-  @media (min-width: variables.$elg) {
-    @content;
+    // 4) строка из цифр, добавляем px
+  @else if meta.type-of($key) == 'string' {
+    $digits-only: true;
+    @for $i from 1 through str-length($key) {
+      $ch: str-slice($key, $i, $i);
+      @if not str-index("0123456789", $ch) {
+        $digits-only: false;
+      }
+    }
+    @if $digits-only {
+      @return $key + px;
+    }
   }
-}
 
-@mixin lg-max {
-  @media (max-width: (variables.$lg - 0.02px)) {
-    @content;
-  }
+  @return null;
 }
+// end media
+////////////////
+// ///////////////////////////////////////// //
 
-@mixin md-max {
-  @media (max-width: variables.$md - 0.02px) {
-    @content;
-  }
-}
 
-@mixin sm-max {
-  @media (max-width: variables.$sm - 0.02px) {
-    @content;
-  }
-}
-
-@mixin esm-max {
-  @media (max-width: variables.$esm - 0.02px) {
-    @content;
-  }
-}
-
-//
-//@mixin _320 {
-//  @media (min-width: 320px) {
-//    @content;
-//  }
-//}
-//
-//@mixin _480 {
-//  @media (min-width: 480px) {
-//    @content;
-//  }
-//}
-//
-//@mixin _600 {
-//  @media (min-width: 600px) {
-//    @content;
-//  }
-//}
-//
-//@mixin _768 {
-//  @media (min-width: 768px) {
-//    @content;
-//  }
-//}
-//
-//@mixin _980 {
-//  @media (min-width: 980px) {
-//    @content;
-//  }
-//}
-//
-//@mixin _1170 {
-//  @media (min-width: 1170px) {
-//    @content;
-//  }
-//}
 
 @function str-replace($string, $search, $replace: "") {
   $index: str-index($string, $search);
@@ -176,7 +188,7 @@ $layout-width: 1900; //указываем ширину макета, от кот
   //outline: 1px solid deepskyblue;
   //overflow-x: hidden;
 
-  @include lg {
+  @include media(lg) {
     --w: #{clampvw(770, 1720)};
     --p: calc((100vw - var(--w)) / 2);
     //--p: calc((100vw - 1520px)/2);

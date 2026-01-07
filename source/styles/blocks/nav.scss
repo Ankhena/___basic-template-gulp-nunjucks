@@ -4,13 +4,13 @@
 $nav-width: variables.$lg;
 
 @mixin media-nav {
-  @media (min-width: $nav-width) {
+  @media (width >= $nav-width) {
     @content;
   }
 }
 
 @mixin media-nav-max {
-  @media (max-width: ($nav-width - 0.02px)) {
+  @media (width < $nav-width) {
     @content;
   }
 }

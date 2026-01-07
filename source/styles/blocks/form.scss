@@ -18,7 +18,7 @@
   margin-bottom: mixins.clampvw(35, 80);
   list-style-type: none;
 
-  @include mixins.sm {
+  @include mixins.media(sm) {
     grid-template-columns: 1fr 1fr;
     column-gap: mixins.clampvw(50, 96);
   }
@@ -128,7 +128,7 @@
 
 .form__links {
 
-  @include mixins.md-max {
+  @include mixins.media(md, max) {
     display: none;
   }
 }
