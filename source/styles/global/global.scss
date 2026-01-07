@@ -131,8 +131,7 @@ button {
   font-variation-settings: inherit;
 }
 
-strong,
-b {
+:where(strong, b) {
   font-weight: var(--bold-fw, 700);
 }
 
@@ -166,16 +165,12 @@ h3 {
   font-family: var(--font-title, inherit);
 }
 
-a {
+:where(a) {
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
 }
 
-.bright {
-  color: var(--bright, #ff0000);
-}
-
-table {
+:where(table) {
   border-collapse: separate;
   border-spacing: 2px;
   background: var(--gradient, currentColor);
@@ -194,9 +189,22 @@ table {
   }
 }
 
-ul,
-ol {
-  display: grid;
-  gap: 1em;
-  padding-left: 1.1em;
+:where(picture, source) {
+  display: contents;
+}
+
+:where(figure) {
+  margin: 0;
+}
+
+:where(address) {
+  font-style: normal;
+}
+
+.bright {
+  color: var(--bright, #ff0000);
+}
+
+:where([data-fancybox]) {
+  cursor: pointer;
 }
