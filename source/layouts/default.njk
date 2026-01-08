@@ -18,21 +18,55 @@
 
 
     <section class="container">
+      <h2>Select и appearance: base-select;</h2>
+      <p><a href="https://caniuse.com/?search=base-select">https://caniuse.com/?search=base-select</a></p>
+
+      <form action="https://echo.htmlacademy.ru" method="post">
+
+        <label for="my-select">label for my-select - label не работает</label>
+
+        <select id="my-select" name="my-select" aria-label="Sort by">
+          <button>
+            <span aria-hidden="true">
+              <span>Sort by :</span>
+              <selectedcontent></selectedcontent>
+            </span>
+                    <span class="arrow">
+              <img src="icons/stack.svg#down-arrow" width="20" height="20" alt="">
+            </span>
+          </button>
+
+          <option value="recommended">Recommended</option>
+          <option value="new">What's New</option>
+          <option value="popular">Popularity</option>
+          <option value="discount">Better Discount</option>
+          <option value="price-h-to-l">Price: High to Low</option>
+          <option value="price-h-to-l">Price: Low to High</option>
+          <option value="rating">Customer Rating</option>
+        </select>
+
+        <button type="submit">Отправить</button>
+
+        <p>Проблемы <code>appearance: base-select</code>:</p>
+        <ul>
+          <li>Валидатор ругается на button внутри select</li>
+          <li>Перестает работать label</li>
+          <li>Какая-то дичь со скруглениями при наведении на select</li>
+        </ul>
+
+        <p>
+          <img class="" src="images/base-select.png" width="500" alt="base-select">
+        </p>
+      </form>
+    </section>
+
+    <section class="container">
       <h2>Section title</h2>
       <p>
         <button class="btn" data-modal-id="ask-question">Открыть модалку</button>
       </p>
 
     </section>
-
-    <section class="container">
-      <h2>Section title2</h2>
-      <p>
-        <a href="#" class="btn" data-modal-id="ask-question">Открыть модалку</a>
-      </p>
-
-    </section>
-
 
     {% include "./blocks/ask-question.njk" %}
 
