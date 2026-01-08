@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link rel="preload" href="/fonts/Mulish-Regular.woff2" type="font/woff2" as="font" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="styles/styles.css?20260108122809988">
+
+<link rel="icon" href="favicon.ico">
+<link rel="icon" href="favicons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicons/favicon-apple-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+
+<meta name="description" content="">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#990000">
+
+  <title>Страница не найдена</title>
+</head>
+
+<body>
+
+<div class="page">
+
+  <header class="page__header header">
+
+  <div class="header__inner container">
+    <a href="" class="header__logo logo logo--inner-page">
+      <img src="images/logo.svg" width="50" height="46" alt="">
+    </a>
+    <nav class="header__nav nav nav--inner-page">
+
+
+      
+
+
+      
+
+    </nav>
+
+
+    <section class="theme-toggle">
+  <h2 class="visually-hidden">Переключение темы сайта</h2>
+
+  <button class="theme-toggle__btn" aria-label="Открыть панель выбора">
+    <span class="theme-toggle__title">Сменить <br>тему</span>
+  </button>
+
+  <div class="theme-toggle__block">
+    <p class="theme-toggle__item">
+      <label class="visually-hidden" for="light">Светлая</label>
+      <input class="theme-toggle__radio" type="radio" name="theme-toggle" id="light" value="light" title="Светлая">
+    </p>
+    <p class="theme-toggle__item">
+      <label class="visually-hidden" for="dark">Тёмная</label>
+      <input class="theme-toggle__radio" type="radio" name="theme-toggle" id="dark" value="dark" title="Тёмная">
+    </p>
+    <p class="theme-toggle__item">
+      <label class="visually-hidden" for="green">Яркая, фирменная</label>
+      <input class="theme-toggle__radio" type="radio" name="theme-toggle" id="green" value="green" title="Яркая">
+    </p>
+  </div>
+</section>
+
+
+  </div>
+</header>
+
+
+  <main class="page__main">
+
+    
+
+<h1>404</h1>
+<p>Страница не найдена. <a href="/">Перейти на&nbsp;главную</a>.</p>
+
+
+
+
+    <section class="container">
+      <h2>Select и appearance: base-select;</h2>
+      <p><a href="https://caniuse.com/?search=base-select">https://caniuse.com/?search=base-select</a></p>
+
+      <form action="https://echo.htmlacademy.ru" method="post">
+
+        <label for="my-select">label for my-select - label не работает</label>
+
+        <select id="my-select" name="my-select" aria-label="Sort by">
+          <button>
+            <span aria-hidden="true">
+              <span>Sort by :</span>
+              <selectedcontent></selectedcontent>
+            </span>
+                    <span class="arrow">
+              <img src="icons/stack.svg#down-arrow" width="20" height="20" alt="">
+            </span>
+          </button>
+
+          <option value="recommended">Recommended</option>
+          <option value="new">What's New</option>
+          <option value="popular">Popularity</option>
+          <option value="discount">Better Discount</option>
+          <option value="price-h-to-l">Price: High to Low</option>
+          <option value="price-h-to-l">Price: Low to High</option>
+          <option value="rating">Customer Rating</option>
+        </select>
+
+        <button type="submit">Отправить</button>
+
+        <p>Проблемы <code>appearance: base-select</code>:</p>
+        <ul>
+          <li>Валидатор ругается на button внутри select</li>
+          <li>Перестает работать label</li>
+          <li>Какая-то дичь со скруглениями при наведении на select</li>
+        </ul>
+
+        <p>
+          <img class="" src="images/base-select.png" width="500" alt="base-select">
+        </p>
+      </form>
+    </section>
+
+    <section class="container">
+      <h2>Section title</h2>
+      <p>
+        <button class="btn" data-modal-id="ask-question">Открыть модалку</button>
+      </p>
+
+    </section>
+
+    <div class="modal hide lock-block" id="ask-question">
+  <div class="modal__body">
+
+    <section class="modal__content">
+      <h2 class="visually-hidden">Обратная связь</h2>
+      <form id="tg-form" class="form" method="post" action="/send.php">
+
+        
+        
+        
+        
+        
+
+        <section id="is-valid-error" class="is-valid is-valid--error hide">
+          <div class="is-valid__body">
+            <h2>Ошибка</h2>
+            <p>Пожалуйста, проверьте правильность заполнения полей</p>
+          </div>
+        </section>
+        <ul class="form__list">
+          <li class="form__item">
+            <input id="username" class="form__input" name="user" type="text" placeholder="Ваше имя" data-focus required>
+            <label class="form__label" for="username">Ваше имя</label>
+          </li>
+          <li class="form__item">
+            <input id="email" class="form__input" name="email" type="email" placeholder="Ваш e-mail">
+            <label class="form__label" for="email">Ваш e-mail</label>
+          </li>
+          <li class="form__item">
+            <p class="form__attention">В любом формате</p>
+            <input id="phone" class="form__input" name="phone" type="tel" placeholder="Контактный телефон" required>
+            <label class="form__label" for="phone">Контактный телефон</label>
+          </li>
+          <li class="form__item">
+            <input id="tg" class="form__input" name="tg" type="text" placeholder="Телеграм" required>
+            <label class="form__label" for="tg">Ваш телеграм</label>
+          </li>
+          <li class="form__item form__item--textarea">
+            <p class="form__attention form__attention--danger">Тексты со ссылками отправлены не будут</p>
+            <textarea id="message" class="form__input form__input--textarea" name="message"
+                      placeholder="Текст сообщения" required></textarea>
+            <label class="form__label" for="message">Текст сообщения</label>
+          </li>
+        </ul>
+
+        <p class="form__conditions">
+          <input type="checkbox" name="conditions" id="conditions" required>
+          <label for="conditions">
+            Я прочитал(а) и принимаю условия <a href="#footer">политики конфиденциальности</a>.
+          </label>
+        </p>
+
+        <button class="btn btn--bright unlock" type="submit">Написать</button>
+      </form>
+    </section>
+    <button class="modal__btn btn btn--close unlock">╳</button>
+  </div>
+</div>
+
+<section id="is-valid-ok" class="is-valid is-valid--ok hide modal">
+  <div class="is-valid__body modal__body">
+    <h2>Ваше сообщение отправлено</h2>
+    <button class="modal__btn btn btn--close unlock">X</button>
+  </div>
+</section>
+
+
+
+
+  </main>
+
+  
+
+  <footer class="page__footer footer">
+  <div class="footer__inner container">
+
+    <ul class="social">
+  
+    <li class="social__item">
+      <a class="social__link social__link--vk" href="#" title="Мы в контакте" style="--icon: url('../icons/stack.svg#social-vk')">
+        <span class="visually-hidden">Мы в контакте</span>
+      </a>
+    </li>
+  
+    <li class="social__item">
+      <a class="social__link social__link--tg" href="#" title="Мы в телеграме" style="--icon: url('../icons/stack.svg#social-telegram')">
+        <span class="visually-hidden">Мы в телеграме</span>
+      </a>
+    </li>
+  
+</ul>
+
+
+    <p>
+      
+        <a href="tel:+7(812)0000000">+7 (812) 000 00 00</a>
+      
+        <a href="tel:+7(812)0000000">+7 (812) 000 00 00</a>
+      
+    </p>
+    <p>
+      <span>Санкт-Петербург,</span> ул.&nbsp;Улица, д.1
+    </p>
+    <p>
+      Пн. – Пт.: с 9:00 до 18:00
+    </p>
+
+    <p class="footer__year year" data-copyright>© <span data-startYear>2025</span>
+    </p>
+  </div>
+</footer>
+
+
+</div>
+
+<a class="to-top" href="#">
+  <span class="visually-hidden">Вверх</span>
+  <svg class="to-top__svg" width="28" height="28" viewbox="0, 0, 38.16, 38.16" aria-hidden="true">
+    <circle class="to-top__circle to-top__circle--bg" r="15.9" cx="19.08" cy="19.08"/>
+    <circle class="to-top__circle to-top__circle--stroke" r="15.9" cx="19.08" cy="19.08" stroke-linecap="round"/>
+  </svg>
+</a>
+
+
+<script src="scripts/script.js?20260108122809988" type="module"></script>
+
+
+</body>
+</html>
