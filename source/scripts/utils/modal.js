@@ -5,7 +5,7 @@ const BUTTONS_SELECTORS = '[data-modal-id]';
 const OPEN_MODAL_CLASS = 'modal--open';
 const BODY_CLASS_WHEN_OPEN_MODAL = 'body-with-open-modal';
 
-const wrapper = document.querySelector('.page');
+const wrapper = document.querySelector('.wrapper');
 let popup = document.querySelectorAll('.modal');
 
 // чтобы закрывалось по крестику и по любой ссылке в модалке
