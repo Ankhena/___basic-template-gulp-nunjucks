@@ -63,5 +63,8 @@
   },
   "volta": {
     "node": "22.15.1"
+  },
+  "dependencies": {
+    "lightningcss": "^1.30.2"
   }
 }
