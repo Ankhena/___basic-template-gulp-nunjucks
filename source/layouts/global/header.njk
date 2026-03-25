@@ -5,28 +5,25 @@
       <img src="images/logo.svg" width="50" height="46" alt="">
     </a>
     <nav class="header__nav nav nav--inner-page">
+      <ul class="nav__list">
+        {% for item in nav %}
+          <li class="nav__item nav__item--{{ item.class }}">
+            <a href="/{{ item.link }}" class="nav__link nav__link--{{ item.class }}">{{ item.title }}</a>
+            {% if item.submenu %}
+              <ul class="nav__submenu">
+                {% for subitem in item.submenu %}
+                  <li class="nav__sub-item">
+                    <a href="/{{ subitem.link }}"
+                       class="nav__link nav__link--{{ subitem.class }}">{{ subitem.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
 
-
-      {# <ul class="nav__list">
-      {% for item in navList %}
-        <li class="nav__item nav__item--{{ item.class }}">
-          <a href="/{{ item.link }}" class="nav__link nav__link--{{ item.class }}">{{ item.title }}</a>
-        {% if item.hasSubmenu %}
-          <ul class="nav__submenu">
-            {% for subitem in item.submenu %}
-              <li class="nav__sub-item">
-                <a href="/{{ subitem.link }}" class="nav__link nav__link--{{ subitem.class }}">{{ subitem.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-      #}
-
-
-      {#   <ul class="nav__list">
+{#   <ul class="nav__list">
       {% for item in navList %}
         <li class="nav__item">
           <a href="/{{ item.link }}" class="nav__link nav__link--{{ item.class }}">{{ item.title | replace("__", "") }}</a>
@@ -36,6 +33,9 @@
 
     </nav>
 
+    <button class="btn-toggle">
+      <span class="visually-hidden">меню</span>
+    </button>
 
     {% include "./theme-toggle.njk" %}
 
