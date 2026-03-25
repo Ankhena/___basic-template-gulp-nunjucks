@@ -45,16 +45,15 @@ $layout-width: 1900; //указываем ширину макета, от кот
 }
 
 
-
 // ///////////////////////////////////////// //
 //media
 
 /// Универсальный миксин, поддерживает 'min', 'max' и 'range'
 // ///////////////////
 // media
-// @include mixins.media(esm) -> mobile-first
-// @include mixins.media(esm, max) -> @media (max-width: 1023.98px)
-// @include mixins.media(sm, elg, range) -> @media (min-width: sm) and (max-width: elg - 0.02px)
+// @include mixins.media(sm) -> mobile-first -> @media (width >= 480px)
+// @include mixins.media(sm, max) -> @media (width < 480px)
+// @include mixins.media(sm, elg, range) -> @media (width >= sm) and (width < elg)
 
 @mixin media($key, $mode-or-max-key: min, $range-flag: null) {
   $value: null;
@@ -77,30 +76,25 @@ $layout-width: 1900; //указываем ширину макета, от кот
   // Если value остался null — выводим предупреждение и НЕ вставляем @content
   @if $value == null {
     @warn "media: unsupported key `#{$key}`; expected key from variables.$sizes, number or px string.";
-  }
-  @else if $mode == range and $max-value == null {
+  } @else if $mode == range and $max-value == null {
     @warn "media: unsupported max key `#{$mode-or-max-key}` for range mode";
-  }
-  @else {
+  } @else {
     // Проверяем корректность режима
     @if not ($mode == min or $mode == max or $mode == range) {
       @warn "media: unknown mode `#{$mode}`, expected 'min', 'max' or 'range'. Falling back to 'min'.";
       $mode: min;
     }
 
-    // Преобразуем все значения к числу для consistent поведения
-    $numeric-value: if(meta.type-of($value) == 'number', $value, meta.inspect($value));
+    // Преобразуем все значения к числу для консистентного поведения
+    $numeric-value: if(meta.type-of($value) == "number", $value, meta.inspect($value));
 
     @if $mode == max {
-      // Для max-width всегда вычитаем 0.02px чтобы избежать пересечений
-      $limit: if(meta.type-of($numeric-value) == 'number', $numeric-value - 0.02, $numeric-value);
-      @media (width <= #{$limit}) {
+      @media (width < #{$numeric-value}) {
         @content;
       }
     } @else if $mode == range {
-      // Для интервала: min-width и max-width с вычитанием 0.02px
-      $numeric-max-value: if(meta.type-of($max-value) == 'number', $max-value, meta.inspect($max-value));
-      $max-limit: if(meta.type-of($numeric-max-value) == 'number', $numeric-max-value - 0.02, $numeric-max-value);
+      // Для интервала: min-width и max-width
+      $max-limit: if(meta.type-of($max-value) == "number", $max-value, meta.inspect($max-value));
 
       @media (width >= #{$numeric-value}) and (width < #{$max-limit}) {
         @content;
@@ -117,19 +111,19 @@ $layout-width: 1900; //указываем ширину макета, от кот
 // Вспомогательная функция для получения значения медиа-запроса
 @function get-media-value($key) {
   // 1) ключ из variables.$sizes
-  @if meta.type-of($key) == 'string' and map.has-key(variables.$sizes, $key) {
+  @if meta.type-of($key) == "string" and map.has-key(variables.$sizes, $key) {
     @return map.get(variables.$sizes, $key);
   }
     // 2) строка с 'px'
-  @else if meta.type-of($key) == 'string' and string.index($key, 'px') {
+  @else if meta.type-of($key) == "string" and string.index($key, "px") {
     @return $key;
   }
     // 3) число (например 992px как number)
-  @else if meta.type-of($key) == 'number' {
+  @else if meta.type-of($key) == "number" {
     @return $key;
   }
     // 4) строка из цифр, добавляем px
-  @else if meta.type-of($key) == 'string' {
+  @else if meta.type-of($key) == "string" {
     $digits-only: true;
     @for $i from 1 through str-length($key) {
       $ch: str-slice($key, $i, $i);
@@ -144,10 +138,10 @@ $layout-width: 1900; //указываем ширину макета, от кот
 
   @return null;
 }
+
 // end media
 ////////////////
 // ///////////////////////////////////////// //
-
 
 
 @function str-replace($string, $search, $replace: "") {
