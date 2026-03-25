@@ -15,7 +15,7 @@ for (let i = 0; i < buttons.length; i++) {
     popup = document.querySelector(modalId);
     popup.classList.remove('hide');
     popup.classList.add('modal-open');
-    document.querySelector('body').classList.add('body-with-open-modal');
+    document.body.classList.add('body-with-open-modal');
   });
 }
 
@@ -23,7 +23,7 @@ const closepopup = () => {
   // console.log(popup);
   popup.classList.add('hide');
   popup.classList.remove('modal--open');
-  document.querySelector('body').classList.remove('body-with-open-modal');
+  document.body.classList.remove('body-with-open-modal');
 };
 
 // закрываем по крестику

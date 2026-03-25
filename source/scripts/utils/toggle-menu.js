@@ -3,17 +3,15 @@
 
 const toggleMenu = () => {
 
-  const toggle = document.querySelector('.btn-toggle');
+  const toggleBtn = document.querySelector('.btn-toggle');
   const nav = document.querySelector('.nav');
 
-  if (toggle !== null) {
-    document.querySelector('body').classList.remove('no-js');
+  if (toggleBtn) {
 
-
-    toggle.addEventListener('click', () => {
+    toggleBtn.addEventListener('click', () => {
       nav.classList.toggle('nav--opened');
-      toggle.classList.toggle('btn-toggle--close');
-      document.querySelector('body').classList.toggle('body-with-open-modal');
+      toggleBtn.classList.toggle('btn-toggle--close');
+      document.body.classList.toggle('body-with-open-modal');
     });
   }
 };
