@@ -6,12 +6,12 @@ const stickyHeader = () => {
   const header = document.querySelector('.header');
   let headerHeight;
   let scrollDistance;
-  let lastScrollTop = 50;
+  const lastScrollTop = 50;
 
   const getHeaderHeight = () => {
     headerHeight = header.offsetHeight;
-    document.body.style.setProperty('--header-height', `${headerHeight}px`)
-  }
+    document.body.style.setProperty('--header-height', `${headerHeight}px`);
+  };
 
   getHeaderHeight();
 
@@ -34,10 +34,9 @@ const stickyHeader = () => {
 
     //lastScrollTop = scrollDistance; // так если нужно только при прокрутке в одну сторону
   });
-}
+};
 
 stickyHeader();
-
 
 // sticky-header
 //////////////////////////////////////////////////////////////////
