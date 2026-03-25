@@ -1,5 +1,5 @@
 import './utils/theme-toggle.js';
-import './utils/toggle-menu.js';
+import './utils/toggle-nav.js';
 import './utils/check-macos.js';
 import './utils/modal.js';
 import {FocusLock} from './utils/focus-lock.js';

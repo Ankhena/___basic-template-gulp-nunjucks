@@ -1,13 +1,12 @@
 //////////////////////////////////////////////////////////////////
-// toggle menu
+// toggle nav
 
-const toggleMenu = () => {
+const toggleNav = () => {
 
   const toggleBtn = document.querySelector('.btn-toggle');
   const nav = document.querySelector('.nav');
 
   if (toggleBtn) {
-
     toggleBtn.addEventListener('click', () => {
       nav.classList.toggle('nav--opened');
       toggleBtn.classList.toggle('btn-toggle--close');
@@ -16,7 +15,7 @@ const toggleMenu = () => {
   }
 };
 
-toggleMenu();
+toggleNav();
 
-// end toggle menu
+// end toggle nav
 //////////////////////////////////////////////////////////////////
