@@ -7,14 +7,14 @@
     <nav class="header__nav nav nav--inner-page">
       <ul class="nav__list">
         {% for item in nav %}
-          <li class="nav__item nav__item--{{ item.class }}">
-            <a href="/{{ item.link }}" class="nav__link nav__link--{{ item.class }}">{{ item.title }}</a>
+          <li class="nav__item">
+            <a href="/{{ item.link }}" class="nav__link{{ ' nav__link--' + item.class if item.class else '' }}">{{ item.title }}</a>
             {% if item.submenu %}
               <ul class="nav__submenu">
                 {% for subitem in item.submenu %}
                   <li class="nav__sub-item">
                     <a href="/{{ subitem.link }}"
-                       class="nav__link nav__link--{{ subitem.class }}">{{ subitem.title }}</a>
+                       class="nav__link{{ ' nav__link--' + subitem.class if subitem.class else '' }}">{{ subitem.title }}</a>
                   </li>
                 {% endfor %}
               </ul>
