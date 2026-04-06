@@ -188,7 +188,12 @@ textarea {
   font-weight: 400;
 
   // поле с автозаполнением (убираем голубой цвет) - часть 1/2
+  // Для сохранения прозрачного фона при автозаполнении
+  // часто используют "хак" с задержкой перехода,
+  // чтобы браузерные стили просто не успели примениться
+
   &:-webkit-autofill,
+  &:-webkit-autofill:hover,
   &:-webkit-autofill:focus {
     transition: background-color 600000s 0s, color 600000s 0s;
   }
@@ -197,18 +202,6 @@ textarea {
   &[data-autocompleted] {
     // stylelint-disable-next-line
     background-color: transparent !important;
-  }
-
-  /* stylelint-disable declaration-no-important  */
-
-  &:-webkit-autofill::first-line,
-  &:-webkit-autofill,
-  &:-webkit-autofill:hover,
-  &:-webkit-autofill:focus,
-  &:-webkit-autofill:active {
-    // stylelint-disable-next-line
-    font-weight: 400;
-    font-family: var(--font-input, inherit) !important;
   }
 
   /* stylelint-enable */
@@ -228,7 +221,6 @@ input {
 
 textarea {
   min-height: 5lh;
-  // line-height: revert;
   resize: vertical;
 }
 
