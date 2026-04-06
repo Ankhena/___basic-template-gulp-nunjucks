@@ -255,9 +255,14 @@ export function startServer() {
     notify: false,
     ui: false,
   }, (err, bs) => {
-    bs.addMiddleware('*', (req, res) => {
-      res.write(readFileSync(`${PATH_TO_DIST}404.html`));
-      res.end();
+    bs.addMiddleware('*', (req, res, next) => {
+      const isHtmlRequest = req.url.endsWith('.html') || !/\.[^.\/]+$/.test(req.url);
+      if (isHtmlRequest) {
+        res.write(readFileSync(`${PATH_TO_DIST}404.html`));
+        res.end();
+      } else {
+        next(); // Стандартный 404 для txt, xml, js, css и т.д.
+      }
     });
   });
 
