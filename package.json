@@ -15,19 +15,20 @@
     "not < 0.25%"
   ],
   "scripts": {
-    "lint:spaces": "editorconfig-cli",
+    "start": "gulp runDev",
+    "build": "gulp buildProd",
+    "preview": "gulp buildProd && gulp startServer",
+    "lint": "npm-run-all -pc lint:**",
+    "lint:spaces": "ec --exclude vendor/*",
     "lint:styles": "stylelint \"source/styles/**/*.scss\"",
     "lint:markup": "cd build && html-validator --quiet --continue",
     "lint:html": "linthtml source/**/*.html --config .linthtmlrc",
     "lint:bem": "gulp lintBem --silent",
-    "lint:scripts": "eslint . --ignore-path .gitignore",
+    "lint:scripts": "eslint . --ignore-pattern .gitignore --ignore-pattern vendor/  --ignore-pattern build/",
     "prelint": "gulp processMarkup --silent",
-    "lint": "npm-run-all -p lint:**",
     "optimizeRaster": "gulp optimizeRaster",
     "optimizeVector": "gulp optimizeVector",
-    "start": "gulp runDev",
-    "build": "gulp buildProd",
-    "preview": "gulp buildProd && gulp startServer"
+    "createStack": "gulp createStack"
   },
   "devDependencies": {
     "@htmlacademy/editorconfig-cli": "3.0.0",
@@ -54,8 +55,8 @@
     "postcss-lightningcss": "1.0.0",
     "postcss-url": "10.1.3",
     "sass": "1.89.0",
-    "stylelint": "16.19.1",
-    "stylelint-config-htmlacademy": "4.2.3",
+    "stylelint": "^16.25.0",
+    "stylelint-config-htmlacademy": "^4.4.0",
     "w3c-html-validator": "1.8.3"
   },
   "overrides": {

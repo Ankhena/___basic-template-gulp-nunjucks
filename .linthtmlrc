@@ -1,7 +1,6 @@
 {
   "extends": "linthtml-config-htmlacademy",
   "rules": {
-    "no-unknown-custom-properties": null,
     "number-max-precision": [
       6,
       {

@@ -256,7 +256,7 @@ export function startServer() {
     ui: false,
   }, (err, bs) => {
     bs.addMiddleware('*', (req, res, next) => {
-      const isHtmlRequest = req.url.endsWith('.html') || !/\.[^.\/]+$/.test(req.url);
+      const isHtmlRequest = req.url.endsWith('.html') || !/\.[^./]+$/.test(req.url);
       if (isHtmlRequest) {
         res.write(readFileSync(`${PATH_TO_DIST}404.html`));
         res.end();
