@@ -1,6 +1,9 @@
 .main {
-  overflow-wrap: break-word;
-  hyphens: auto; // эти два только вместе нормально переносят
+  // эти два только вместе нормально переносят
+  // только они переносят там, где не надо
+  // overflow-wrap: break-word;
+  // hyphens: auto;
+  word-break: break-word;
 
   :where(a:not([class])) {
     color: var(--bright, #ff0000);
