@@ -6,9 +6,9 @@
   --form-base-font-size: 1rem;
   font-size: var(--form-base-font-size);
 
-  //*:user-invalid {
-  //	color: var(--danger, #ff0000);
-  //}
+  *:user-invalid {
+    box-shadow: inset 0 0 0 99em var(--danger, #ff0000);
+  }
 }
 
 .form__list {
