@@ -1,5 +1,6 @@
 .main {
-  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto; // эти два только вместе нормально переносят
 
   :where(a:not([class])) {
     color: var(--bright, #ff0000);
