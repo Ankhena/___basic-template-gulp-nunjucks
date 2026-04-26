@@ -4,6 +4,7 @@
 .btn {
   display: inline-block;
   vertical-align: middle;
+  align-content: center;
   //min-width: 160px;
   max-width: 100%;
   //padding: 1.52em 3.24em;
@@ -17,6 +18,7 @@
   line-height: normal;
   text-decoration: none;
   text-align: center;
+  word-break: initial;
   cursor: pointer;
 
   &:disabled {
