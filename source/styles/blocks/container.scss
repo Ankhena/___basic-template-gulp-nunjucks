@@ -1,0 +1,38 @@
+@use "../global/mixins";
+
+@mixin container {
+
+  width: 100%;
+  //max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--x-padding, 10px);
+  padding-right: var(--x-padding, 10px);
+
+  //outline: 1px solid deepskyblue;
+  //overflow-x: hidden;
+
+  @include media(lg) {
+    --w: #{clampvw(770, 1720)};
+    --p: calc((100vw - var(--w)) / 2);
+    //--p: calc((100vw - 1520px)/2);
+    //max-width: $lg;
+    max-width: clampvw(770, 1520); // чтобы были пропорциональные поля
+
+    // переведем в padding
+    // если переводить в padding, то потом у дочерних не работает max-width 100%
+    // или это из-за фокуса флексов, решаемых min-width: 0;
+    // проверь
+    //padding-left: var(--p);
+    //padding-right: var(--p);
+  }
+}
+
+@mixin container-padding {
+  padding-left: var(--x-padding, 10px);
+  padding-right: var(--x-padding, 10px);
+}
+
+.container {
+  @include container;
+}
